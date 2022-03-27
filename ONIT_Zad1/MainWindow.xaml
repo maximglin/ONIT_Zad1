@@ -1,0 +1,35 @@
+﻿<Window x:Class="ONIT_Zad1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ONIT_Zad1"
+        mc:Ignorable="d"
+        Title="Шифрование и дешифрование AES, DES" Height="450" Width="800">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Шифрование" DataContext="{Binding EncryptionContext}">
+                <StackPanel>
+                    <TextBlock>Выберите файл:</TextBlock>
+                    <local:OpenFile AbsolutePath="{Binding FilePath, Mode=OneWayToSource}"></local:OpenFile>
+                    <TextBlock>Выберите алгоритм шифрования:</TextBlock>
+                    <ComboBox ItemsSource="{Binding Algorithms}" SelectedItem="{Binding SelectedAlgorythm}"></ComboBox>
+                    <TextBlock>Введите парольную фразу:</TextBlock>
+                    <PasswordBox x:Name="password_enc" PasswordChanged="password_enc_PasswordChanged"></PasswordBox>
+                    <Button Margin="0 50 0 0" Command="{Binding EncryptCommand}">Зашифровать</Button>
+                    <Button Margin="0 10 0 0" Command="{Binding CancelCommand}">Отмена</Button>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Дешифрование" DataContext="{Binding DecryptionContext}">
+                <StackPanel>
+                    <TextBlock>Выберите файл:</TextBlock>
+                    <local:OpenFile AbsolutePath="{Binding FilePath, Mode=OneWayToSource}"></local:OpenFile>
+                    <TextBlock>Введите парольную фразу:</TextBlock>
+                    <PasswordBox x:Name="password_dec" PasswordChanged="password_dec_PasswordChanged"></PasswordBox>
+                    <Button Margin="0 50 0 0" Command="{Binding DecryptCommand}">Расшифровать</Button>
+                    <Button Margin="0 10 0 0" Command="{Binding CancelCommand}">Отмена</Button>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
